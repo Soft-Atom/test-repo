@@ -43,25 +43,23 @@ function assertUserResponse(obj) {
 }
 function getUsers() {
     return __awaiter(this, void 0, void 0, function* () {
-        const url = 'https://dummyjson.com/uses';
+        const url = 'https://dummyjson.com/users';
         const data = yield myFetch(url);
         assertUserResponse(data);
         console.log(data.users);
     });
 }
 function wrappedQuery(f) {
-    try {
-        return (...args) => {
+    return (...args) => {
+        try {
             return f(...args);
-        };
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            console.error(e);
         }
-    }
+        catch (e) {
+            if (e instanceof Error) {
+                console.error(e);
+            }
+        }
+    };
 }
 const query = wrappedQuery(getUsers);
-if (query) {
-    query();
-}
+query();

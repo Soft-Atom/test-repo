@@ -102,25 +102,24 @@ function assertUserResponse(obj:unknown): asserts obj is IUserResponse {
 } 
 
 async function getUsers() {
-	const url = 'https://dummyjson.com/uses';
+	const url = 'https://dummyjson.com/users';
 	const data = await myFetch(url);
 	assertUserResponse (data);
 	console.log(data.users);
 }
 
-function wrappedQuery(f:Function) {
-	try {
-		return (...args: unknown[])=>{
-			const res = f(...args);
-			return res;
-		};
-	}
-	catch(e:unknown) {
-		if (e instanceof Error){
-			console.error(e);
+function wrappedQuery(f:Function): Function {
+	return (...args: unknown[]): unknown=>{
+		try {
+			return f(...args);
+		} catch(e:unknown) {
+			if (e instanceof Error){
+				console.error(e);
+			}
 		}
+
 	}
 }
 
 const query = wrappedQuery(getUsers);
-if (query) {query();}
+query();
