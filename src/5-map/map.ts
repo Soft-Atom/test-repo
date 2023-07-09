@@ -10,7 +10,7 @@ class MyMap {
 	private buckets: (TBucket | undefined)[]  = [];
 	#_size: number = 0;
 	
-	constructor(arr?: any[]) {
+	constructor(arr?: TBucket[]) {
 		if (arr) {
 			for (let el of arr) {
 				const [key, value] = el;
