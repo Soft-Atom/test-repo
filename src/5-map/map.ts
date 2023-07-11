@@ -8,7 +8,7 @@ type TBucket = [any, any, TBucket?];
 
 class MyMap {
 	private buckets: (TBucket | undefined)[]  = [];
-	#_size: number = 0;
+	#size: number = 0;
 	
 	constructor(arr?: TBucket[]) {
 		if (arr) {
@@ -33,7 +33,7 @@ class MyMap {
 		return undefined;
 	}
 
-	private removeBucketFromChain(bucketsChain: TBucket,bucket: TBucket) {
+	private removeBucketFromChain(bucketsChain: TBucket,bucket: TBucket): void {
 		if (bucketsChain[2] === bucket) {
 			bucketsChain[2] = bucket[2];
 			bucket[2] = undefined; // по идее сборщик мусора должен его удалить после этго?
@@ -46,7 +46,7 @@ class MyMap {
 		if (this.buckets[index] === bucket) {
 			this.buckets[index] = bucket[2];
 			bucket[2] = undefined;
-		} else {;
+		} else {
 			//почему тут нужно делать каст? 
 			// либо "!""
 			//если ввести доп переменную все рабоотает
@@ -57,15 +57,15 @@ class MyMap {
 	}
 
 	get size(): number {
-		return this.#_size
+		return this.#size
 	}
 
 	private incSize(): void{
-		this.#_size += 1;
+		this.#size += 1;
 	}
 
 	private decSize(): void{
-		this.#_size -= 1;
+		this.#size -= 1;
 	}
 
 	public set(key: any, value: any): void {
@@ -110,7 +110,7 @@ class MyMap {
 	// по идее сборщик мусора должен все оостальноео почистить
 	public clear() {
 		this.buckets = [];
-		this.#_size = 0
+		this.#size = 0
 	}
 }
 
