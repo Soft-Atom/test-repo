@@ -9,8 +9,6 @@
 	type TObj = Record<TKey, any>;
 
 	function pickObjectKeys<T extends TObj>(obj: T, keys: (keyof T)[]): T {
-		//после вот этого вот в памяти остается объект obj ?
-		//или он будет удален сборщиком мусора ? 
 		return keys.reduce<T>(
 			(acc:T, el): T => {
 				acc[el] = obj[el];
