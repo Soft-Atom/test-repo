@@ -5,7 +5,7 @@
 		skills: ['typescript', 'javascript']
 	}
 
-	type KeyT = string | number | symbol;
+	type TKey = string | number | symbol;
 	type TObj = Record<TKey, any>;
 
 	function pickObjectKeys<T extends TObj>(obj: T, keys: (keyof T)[]): T {
