@@ -72,12 +72,15 @@ class ProxyAPI {
 (async () => {
 	const dummyApi = DummyAPI.get();
 	const proxyApi = new ProxyAPI(dummyApi);
-	let product  = await proxyApi.getProduct(1);
-	console.log(product);
-	product = await proxyApi.getProduct(2);
-	console.log(product);
-	product = await proxyApi.getProduct(10);
-	console.log(product);
-
+	try {
+		let product  = await proxyApi.getProduct(1);
+		console.log(product);
+		product = await proxyApi.getProduct(2);
+		console.log(product);
+		product = await proxyApi.getProduct(10);
+		console.log(product);
+	} catch (e) {
+		if( e instanceof Error) console.log(e.message);
+	}
 })();
 
