@@ -1,8 +1,15 @@
 type TSign = '-' | '';
+type TStringKey<T>  = T extends string 
+	? T 
+	: T extends number
+		? String<T>
+		: '';
 type TKeysChain<T> = {
-	[K in keyof T]: T[K] extends object
-        ? `${K extends string? K: ''}.${TKeysChain<T[K]>}` 
-        : `${K extends string? K: ''}`
+	[K in keyof T]-?: T[K] extends undefined? never: 
+		T[K] extends object
+			? `${TStringKey<K>}.${TKeysChain<T[K]>}` 
+			: TStringKey<K>
+
 }[keyof T];
 	
 function sort<T>(property: `${TSign}${TKeysChain<T>}`): (a:T, b:T) => number;
@@ -15,3 +22,5 @@ function sortBy<T>(
 declare module 'sort-by' {
 	export default sortBy;
 }
+
+
