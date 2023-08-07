@@ -39,14 +39,14 @@
 			this.list = this.list.filter( el => el !== p);
 		}
 
-		getDateIterator(method: TSortMethod = 'asc'): Iterator {
+		getDateIterator(method: TSortMethod = 'asc'): MyIterator {
 			this.sort(method, 'date');
-			return new Iterator(this);
+			return new MyIterator(this);
 		}
 
-		getIdIterator(method: TSortMethod = 'asc'): Iterator {
+		getIdIterator(method: TSortMethod = 'asc'): MyIterator {
 			this.sort(method, 'id');
-			return new Iterator(this);
+			return new MyIterator(this);
 		}
 	}
 
@@ -57,7 +57,7 @@
 		index(): number
 	}
 
-	class Iterator implements IIterator<IPost> {
+	class MyIterator implements IIterator<IPost> {
 		private position: number = 0;
 
 		constructor(private posts: Posts) { }

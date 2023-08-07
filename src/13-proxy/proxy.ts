@@ -57,7 +57,7 @@ class DummyAPI {
 }
 
 class ProxyAPI {
-	// API: DummyAPI = new DummyAPI();
+	
 	constructor(public API: DummyAPI) { }
 	async getProduct(id: number): Promise<IProduct | Error>{
 		if(id < 10) {

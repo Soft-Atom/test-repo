@@ -4,28 +4,14 @@ enum HttpMethod {
 	Put = 'PUT',
 	Delete = 'DELETE'
 }
-// type THttpMode = 'cors' | 'no-cors' | 'same-origin';
-// type THttpCache = 'default' | 'no-cache' | 'reload' | 'force-cache' | 'only-if-cached';
-// type THttpCredentials = 'include' | 'same-origin' | 'omit';
-// type THttpRedirect = 'manual' | 'follow' | 'error';
 
-// interface IFetchOptions {
-// 	method?: HttpMethod;
-// 	mode?: THttpMode;
-//     cache?: THttpCache;
-//     credentials?: THttpCredentials;
-//     headers?: Headers;
-//     redirect?: THttpRedirect; 
-//     referrerPolicy?: ReferrerPolicy;
-//     body?: string | FormData
-// }
 
 interface IFetchOptions extends RequestInit{
 	method?: HttpMethod
 }
 
 export class FetchBuilder {
-	private url: string | URL;
+	private url: string | URL = "";
 	private options: IFetchOptions = {}
 
 	setUrl(url: string | URL) {
